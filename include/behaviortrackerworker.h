@@ -64,13 +64,14 @@ private:
     float *colors;
 
     // For DLC python class
+#ifdef USE_PYTHON
     PyObject *pInstance;
     PyObject *pClass;
     PyObject *pModule;
     PyObject *pDict;
     PyObject *pArgs;
     PyObject *pValue;
-
+#endif
     bool m_PythonInitialized;
     int m_PythonError;
 };

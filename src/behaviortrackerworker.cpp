@@ -78,7 +78,9 @@ void BehaviorTrackerWorker::initPython()
 
 int BehaviorTrackerWorker::initNumpy()
 {
-    import_array1(-1);
+#ifdef USE_PYTHON
+	import_array1(-1);
+#endif
 }
 
 void BehaviorTrackerWorker::setUpDLCLive()
@@ -204,7 +206,8 @@ void BehaviorTrackerWorker::setPoseBufferParameters(QVector<float> *poseBuf, int
 
 void BehaviorTrackerWorker::getColors()
 {
-    // TODO: Currently number of colors is hardcoded. Change this
+#ifdef USE_PYTHON
+    	// TODO: Currently number of colors is hardcoded. Change this
     pValue = PyObject_CallMethod(pInstance,"getColors", NULL);
 
     PyArrayObject *np_ret = reinterpret_cast<PyArrayObject*>(pValue);
@@ -222,6 +225,7 @@ void BehaviorTrackerWorker::getColors()
             colors[i*3+1] = (float)c_out[i*3+1]/170.0f;
             colors[i*3+2] = (float)c_out[i*3+2]/170.0f;
      }
+#endif
 }
 
 void BehaviorTrackerWorker::startRunning()

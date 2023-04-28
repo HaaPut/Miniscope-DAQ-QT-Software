@@ -64,7 +64,9 @@ BehaviorTracker::BehaviorTracker(QObject *parent, QJsonObject userConfig, qint64
 
 int BehaviorTracker::initNumpy()
 {
+#ifdef USE_PYTHON
     import_array1(-1);
+#endif
 }
 
 void BehaviorTracker::parseUserConfigTracker()

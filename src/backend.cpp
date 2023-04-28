@@ -46,7 +46,7 @@ backEnd::backEnd(QObject *parent) :
 {
 #ifdef DEBUG
 //    QString homePath = QDir::homePath();
-    m_userConfigFileName = "./userConfigs/UserConfigExample.json";
+    m_userConfigFileName = "./userconfig/UserConfigExample.json";
 //    loadUserConfigFile();
     handleUserConfigFileNameChanged();
 
@@ -87,7 +87,7 @@ backEnd::backEnd(QObject *parent) :
     QString jsonFile;
     QJsonObject jObj;
     QStringList supportedDevices;
-    file.setFileName("deviceConfigs/videoDevices.json");
+    file.setFileName("config/videoDevices.json");
     bool status = file.open(QIODevice::ReadOnly | QIODevice::Text);
     if (status == true) {
         jsonFile = file.readAll();
@@ -103,7 +103,7 @@ backEnd::backEnd(QObject *parent) :
     for (int i=0; i < supportedDevices.length(); i++) {
         initDisplayMessage.append("\t" + supportedDevices[i] + "\n");
     }
-    initDisplayMessage.append("More information on the devices can be found in /deviceConfigs/videoDevices.json.\n\n");
+    initDisplayMessage.append("More information on the devices can be found in /config/videoDevices.json.\n\n");
     initDisplayMessage.append("Available compression Codecs on your computer are:\n\t" + m_availableCodecList +
                               "\n\nUnavailable compression Codes on your computer are:\n\t" + tempStr.chopped(2));
 
@@ -112,7 +112,7 @@ backEnd::backEnd(QObject *parent) :
 //    QObject::connect(this, SIGNAL (userConfigFileNameChanged()), this, SLOT( handleUserConfigFileNameChanged() ));
 
 
-    file.setFileName("deviceConfigs/userConfigProps.json");
+    file.setFileName("config/userConfigProps.json");
     status = file.open(QIODevice::ReadOnly | QIODevice::Text);
     if (status == true) {
         jsonFile = file.readAll();
